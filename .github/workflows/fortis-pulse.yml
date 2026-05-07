@@ -33,3 +33,9 @@ jobs:
           curl -fsS -G \
             --data-urlencode "token=${{ secrets.FORTIS_PULSE_TOKEN }}" \
             "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisPromote"
+
+      - name: Recalculate FORTIS live KPIs
+        run: |
+          curl -fsS -G \
+            --data-urlencode "token=${{ secrets.FORTIS_PULSE_TOKEN }}" \
+            "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisKpis"

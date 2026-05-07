@@ -1,0 +1,15 @@
+name: FORTIS Pulse
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  pulse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call FORTIS pulse endpoint
+        run: |
+          curl -fsS "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisPulse?token=${{ secrets.FORTIS_PULSE_TOKEN }}"

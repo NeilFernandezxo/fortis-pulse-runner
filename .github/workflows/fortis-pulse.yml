@@ -12,4 +12,6 @@ jobs:
     steps:
       - name: Call FORTIS pulse endpoint
         run: |
-          curl -fsS "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisPulse?token=${{ secrets.FORTIS_PULSE_TOKEN }}"
+          curl -fsS \
+            -H "x-fortis-token: ${{ secrets.FORTIS_PULSE_TOKEN }}" \
+            "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisPulse"

@@ -10,8 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Call FORTIS pulse endpoint
+      - name: Ensure FORTIS live reports
         run: |
           curl -fsS -G \
             --data-urlencode "token=${{ secrets.FORTIS_PULSE_TOKEN }}" \
-            "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisPulse"
+            "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisLiveReports"
+
+      - name: Scan FORTIS source feeds
+        run: |
+          curl -fsS -G \
+            --data-urlencode "token=${{ secrets.FORTIS_PULSE_TOKEN }}" \
+            "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisScan"
+
+      - name: Evaluate FORTIS signals
+        run: |
+          curl -fsS -G \
+            --data-urlencode "token=${{ secrets.FORTIS_PULSE_TOKEN }}" \
+            "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisEvaluate"
+
+      - name: Promote FORTIS signals to incidents
+        run: |
+          curl -fsS -G \
+            --data-urlencode "token=${{ secrets.FORTIS_PULSE_TOKEN }}" \
+            "https://sphere-studio.wixstudio.com/fortisintel/_functions/fortisPromote"
